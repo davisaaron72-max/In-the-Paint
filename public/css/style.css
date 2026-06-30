@@ -1,0 +1,828 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --court: #11151c;
+  --court-line: #232a37;
+  --hardwood: #b9794a;
+  --orange: #e8631c;
+  --paper: #f6f3ec;
+  --chalk: #8b919b;
+  --away-red: #d6473c;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--court);
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 28px);
+  color: var(--paper);
+  min-height: 100vh;
+  padding-bottom: 5.5rem;
+}
+
+.app-header {
+  padding: 1.75rem 1.25rem 1.25rem;
+  border-bottom: 1px solid var(--court-line);
+}
+
+.app-header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+}
+
+.demo-banner {
+  background: var(--orange);
+  color: var(--court);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.screen {
+  padding: 1rem 1rem 0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------- Auth card ---------- */
+.card {
+  background: var(--paper);
+  color: var(--court);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.card h2 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+
+.card label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.card input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.card button {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--orange);
+  color: var(--paper);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.hint {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: center;
+}
+
+/* ---------- Bottom nav ---------- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background: var(--paper);
+  padding: 0.7rem 0 calc(0.7rem + env(safe-area-inset-bottom));
+  border-top: 1px solid #e2ded3;
+  z-index: 10;
+}
+
+.nav-item {
+  color: var(--chalk);
+  text-decoration: none;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0 0.1rem;
+}
+
+.nav-item.active {
+  color: var(--orange);
+}
+
+/* ---------- Section heading ---------- */
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0.5rem 0 1rem;
+}
+
+.section-heading h2 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 1.15rem;
+}
+
+.section-heading .count {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--chalk);
+  font-size: 0.8rem;
+}
+
+/* ---------- Roster ---------- */
+.roster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.player-card {
+  background: var(--paper);
+  color: var(--court);
+  border-radius: var(--radius);
+  padding: 0.9rem 0.9rem 0.8rem;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid var(--player-color, var(--orange));
+}
+
+.player-jersey {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--player-color, var(--orange));
+  opacity: 0.92;
+}
+
+.player-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 0.35rem;
+}
+
+.player-position {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--chalk);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+/* ---------- Schedule ---------- */
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-row {
+  display: flex;
+  background: var(--paper);
+  color: var(--court);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.event-date {
+  font-family: 'Oswald', sans-serif;
+  background: var(--hardwood);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.9rem;
+  min-width: 64px;
+  text-align: center;
+}
+
+.event-date .month {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.event-date .day {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.event-body {
+  flex: 1;
+  padding: 0.7rem 0.9rem;
+}
+
+.event-opponent {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.event-meta {
+  font-size: 0.78rem;
+  color: #6b6f76;
+  margin-top: 0.25rem;
+}
+
+.badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 5px;
+  margin-right: 0.4rem;
+}
+
+.badge.home { background: #e3efe6; color: #2f7a45; }
+.badge.away { background: #fbe7e5; color: var(--away-red); }
+.badge.tournament { background: #fdeedb; color: var(--orange); }
+
+/* ---------- Chat ---------- */
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.chat-bubble-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 78%;
+}
+
+.chat-bubble-row.mine {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.chat-sender {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.2rem;
+  color: var(--sender-color, var(--orange));
+}
+
+.chat-bubble {
+  background: var(--paper);
+  color: var(--court);
+  padding: 0.6rem 0.85rem;
+  border-radius: 14px;
+  border-top-left-radius: 4px;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  border-left: 3px solid var(--sender-color, var(--orange));
+}
+
+.chat-bubble-row.mine .chat-bubble {
+  background: var(--orange);
+  color: var(--paper);
+  border-top-left-radius: 14px;
+  border-top-right-radius: 4px;
+  border-left: none;
+}
+
+.chat-timestamp {
+  font-size: 0.65rem;
+  color: var(--chalk);
+  margin-top: 0.2rem;
+}
+
+.chat-input-row {
+  position: fixed;
+  bottom: 4.1rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--court);
+  border-top: 1px solid var(--court-line);
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 0.65rem 0.9rem;
+  border-radius: 20px;
+  border: none;
+  background: var(--paper);
+  color: var(--court);
+  font-size: 0.88rem;
+}
+
+.chat-input-row button {
+  background: var(--orange);
+  color: var(--paper);
+  border: none;
+  border-radius: 20px;
+  padding: 0 1.1rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+/* ---------- Profile ---------- */
+.profile-card {
+  background: var(--paper);
+  color: var(--court);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.profile-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--player-color, var(--orange));
+  color: var(--paper);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.profile-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--orange);
+  margin-top: 0.15rem;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-row {
+  background: var(--paper);
+  color: var(--court);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.settings-row .chev {
+  color: var(--chalk);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ---------- Gallery ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-thumb {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.gallery-thumb-uploader {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 0.15rem 0.35rem;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.chat-attach-btn {
+  background: var(--paper);
+  color: var(--court);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* ---------- Schedule view toggle ---------- */
+.view-toggle {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  flex: 1;
+  background: var(--paper);
+  color: var(--chalk);
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.toggle-btn.active {
+  color: var(--orange);
+  opacity: 1;
+}
+
+/* ---------- Calendar ---------- */
+.cal-month-label {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.95rem;
+  color: var(--paper);
+  margin-bottom: 0.6rem;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+  background: var(--paper);
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.25rem;
+}
+
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  position: relative;
+}
+
+.cal-cell.empty {
+  visibility: hidden;
+}
+
+.cal-weekday {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--chalk);
+  text-transform: uppercase;
+}
+
+.cal-day-num {
+  color: var(--court);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.cal-cell.has-event {
+  background: #f0ece2;
+}
+
+.cal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.cal-dot.home { background: #2f7a45; }
+.cal-dot.away { background: var(--away-red); }
+.cal-dot.tournament { background: var(--orange); }
+
+/* ---------- Training ---------- */
+.training-card {
+  background: var(--paper);
+  color: var(--court);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.training-card-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.training-card-tag.workout { background: #e8f0fb; color: #2563eb; }
+.training-card-tag.video { background: #fdeedb; color: var(--orange); }
+
+.training-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.training-card-desc {
+  font-size: 0.84rem;
+  color: #6b6f76;
+  margin-bottom: 0.6rem;
+}
+
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.exercise-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  border-top: 1px solid #ece8de;
+  padding-top: 0.35rem;
+}
+
+.exercise-sets {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--chalk);
+  font-weight: 700;
+}
+
+.video-placeholder {
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  padding: 1.4rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Header avatar ---------- */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--court);
+  border: none;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ---------- Leaderboard ---------- */
+.leader-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--paper);
+  color: var(--court);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.leader-rank {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--chalk);
+  width: 22px;
+}
+
+.leader-rank.top3 { color: var(--orange); }
+
+.leader-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.leader-name {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.leader-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--orange);
+}
+
+.leader-stat-tabs {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.2rem;
+}
+
+.leader-stat-tab {
+  background: var(--paper);
+  color: var(--chalk);
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.leader-stat-tab.active {
+  color: var(--orange);
+  opacity: 1;
+}
+
+.export-btn {
+  background: var(--paper);
+  color: var(--court);
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+/* ---------- Splash screen ---------- */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+
+#splash-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#splash-screen img {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 115%;
+  max-width: none;
+}
+
+#splash-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, #000 95%);
+}
+
+.splash-wordmark {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding-bottom: 3.2rem;
+}
+
+.splash-wordmark h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--paper);
+}
+
+.splash-wordmark h2 span {
+  color: var(--orange);
+}
+
+/* ---------- App background: B&W court ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: url('/assets/bg-court.png') center / cover no-repeat;
+  opacity: 0.32;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(17,21,28,0.1) 0%, rgba(17,21,28,0.6) 55%, rgba(17,21,28,0.92) 100%);
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
